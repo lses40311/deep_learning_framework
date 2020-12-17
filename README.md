@@ -8,7 +8,7 @@ This project implemented a neural network framework `dl_cnn.py` following to the
     - `set_input_data(X)` and `set_target(y)` are functions for setting the input data and the target labels.
     - Fully-connected layers can be added to the network by using function `add_FC_layer(n_hidden, activation)`.
     - The output layer for calculating the mean squared error can be added to the network by using `add_mse_layer()`.
-    - `back_propagation()` forward passes the data and back propagates the result for obtaining the gradient, and performs a step of gradient decent on the parameters. The back propagation function heavily relies on calling the `build_grad(V)` function, which was implemented by following the algorithm 6.5 and 6.6.
+    - `back_propagation()` forward passes the data and back propagates the result for obtaining the gradient, and performs a step of gradient decent on the parameters. The back propagation function heavily relies on calling the `build_grad(V)` function, which was implemented by following the algorithm 6.5 and 6.6 in the textbook.
 - `class Variable` is a data structure for storing the variable in the computational graph.
 - `class ComputationalGraph` handles the construction of the computational graph, such as inserting and deleting variable vertex. This class also contains three abstract functions described in the textbook p.p. 215, namely `get_operation(V)`, `get_consumers(V)`, and `get_inputs(V)`.
 
@@ -57,7 +57,7 @@ The function `data_loader_regression()` was implemented for preprocessing (one-h
 
 ### Prediction results
 
-[Untitled](https://www.notion.so/763dc61248ae45238c8bda24c853db31)
+[Hyper-parameters and results](https://www.notion.so/763dc61248ae45238c8bda24c853db31)
 
 The figure below shows the learning curve of the neural network. The error fluctuated a little at the beginning then went down fast, and eventually saturated.
 
@@ -92,7 +92,7 @@ dnn.add_cross_entropy_layer()
 errs = dnn.train(n_epoch=5000, mini_batch_size=64)
 ```
 
-[Untitled](https://www.notion.so/ed9c5b3b7c5d4cf1a31c87bc5b205fa3)
+[Hyper-parameters and results](https://www.notion.so/ed9c5b3b7c5d4cf1a31c87bc5b205fa3)
 
 The loss function (cross-entropy) is more or less correlated to the number of input data points, and the size of mini-batch might vary, so I got a fluctuating learning curve. To present the results clearly, I added the accuracies ($acc = \frac{correctly~ classified~ points}{total~ data~ points}$). The results showed that the training error is lower than the testing error. 
 
@@ -120,39 +120,37 @@ dnn.add_FC_layer(n_hidden=10, activation=False)
 dnn.add_stable_softmax_cross_entropy_layer()
 ```
 
-[https://lh3.googleusercontent.com/GH1ItN8aS1v1AEMCo9ghZRivwAmF9FCO_MAvKGWhJTAMNP26uklPPl2Q4sEJb1eCGHKFnImzmk0zB1h9OnyF9iRPoHMtU4R6HdzwLTwCox2DLhiL5gL8zgpRksQ_ni3pBzmX-Oal](https://lh3.googleusercontent.com/GH1ItN8aS1v1AEMCo9ghZRivwAmF9FCO_MAvKGWhJTAMNP26uklPPl2Q4sEJb1eCGHKFnImzmk0zB1h9OnyF9iRPoHMtU4R6HdzwLTwCox2DLhiL5gL8zgpRksQ_ni3pBzmX-Oal)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled.png)
 
-[https://lh3.googleusercontent.com/X_9r75QhzWCPul5fJCtiV31L4c29wfIaWdWrnTpZLsPlLVuzEUn3QbacobYsnoeXzohQ7s2etAw39eOdq56H0Lxe4P3jt5mYulYwnLua3ymiPF81f-G_XapCRsh_CpeJG1S-nhvR](https://lh3.googleusercontent.com/X_9r75QhzWCPul5fJCtiV31L4c29wfIaWdWrnTpZLsPlLVuzEUn3QbacobYsnoeXzohQ7s2etAw39eOdq56H0Lxe4P3jt5mYulYwnLua3ymiPF81f-G_XapCRsh_CpeJG1S-nhvR)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%201.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%201.png)
 
 ### Prediction results
 
-The figure below shows a misclassified image and an image of the class. The figure on the bottom left is a handwritten 2, but the orientation was a little off and classified as a 7. The figure on the bottom right is a correctly classified 7. We can observe their similarity.
-
-[https://lh3.googleusercontent.com/fmdYLw5ujOivjVXszqlD-bKCITiIOFstphVJrl_7JxLFqyuXly0oo0gbs5vh9gijNr8eLfrqVm4id0ilsqo5DeemY3G4d8L8ljWlpz0H6khseCDK6iHDCmVY0yI0CcR0XuTtP1aH](https://lh3.googleusercontent.com/fmdYLw5ujOivjVXszqlD-bKCITiIOFstphVJrl_7JxLFqyuXly0oo0gbs5vh9gijNr8eLfrqVm4id0ilsqo5DeemY3G4d8L8ljWlpz0H6khseCDK6iHDCmVY0yI0CcR0XuTtP1aH)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%202.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%202.png)
 
 ### Feature map visualization
 
 We selected an image of 2 and plotted all the feature maps on the first and second layers, which were set to have 8 and 16 kernels in this case. The original image is shown as follow:
 
-[https://lh5.googleusercontent.com/BLNK6bqBGipRsaatej0haYU7URNzKTGh11n1P55bwBg8XFt78ayK2JMjHJBeYW_Ac39o2mhaHr5iObcPP_8vjLZF9yeL2yzEV_QsCzVRy8u69lRi4L9SQLLm7KN1H88ZSYGnYRv2](https://lh5.googleusercontent.com/BLNK6bqBGipRsaatej0haYU7URNzKTGh11n1P55bwBg8XFt78ayK2JMjHJBeYW_Ac39o2mhaHr5iObcPP_8vjLZF9yeL2yzEV_QsCzVRy8u69lRi4L9SQLLm7KN1H88ZSYGnYRv2)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture1.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture1.png)
 
 The feature maps of the **first convolution layer** are shown below. The layer seems to detect some basic shapes such as lines and circles. For example, feature maps 0 and 3 have pixels activated in lines.
 
-[https://lh4.googleusercontent.com/tZP8lL9OjwpVHm8ECt4nB4Dzvxh1hO4lr8TPiUYrahhwuF-oE2prTwaOwp3ts6yPtlQboaVt4YbubOPJ9qh1c6t2Q31Uexnn57zICS-qwrOTbqhDO6cM4_qtIs7kyUGaxJ2P_bXN](https://lh4.googleusercontent.com/tZP8lL9OjwpVHm8ECt4nB4Dzvxh1hO4lr8TPiUYrahhwuF-oE2prTwaOwp3ts6yPtlQboaVt4YbubOPJ9qh1c6t2Q31Uexnn57zICS-qwrOTbqhDO6cM4_qtIs7kyUGaxJ2P_bXN)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture2.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture2.png)
 
 We plot the kernel that generates feature map 6 and 7. Kernel 6 seems to detect slashes in the image. Kernel 7 seems to detect curves in the image.
 
-[https://lh6.googleusercontent.com/DxVn5nzPZAAe3uoydQJoXi95dnNMxRNIh5q_MI_x7N8i9hzfNA9ILtyB7sQdRVGfSiX-Uxnhfs88AtZe8nJ1gQW2sm9tQ0PLPpqfUJ6qfIqJ3bo5_JD4HDkRlmgu_ZCJ-E2PDqsJ](https://lh6.googleusercontent.com/DxVn5nzPZAAe3uoydQJoXi95dnNMxRNIh5q_MI_x7N8i9hzfNA9ILtyB7sQdRVGfSiX-Uxnhfs88AtZe8nJ1gQW2sm9tQ0PLPpqfUJ6qfIqJ3bo5_JD4HDkRlmgu_ZCJ-E2PDqsJ)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture3.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture3.png)
 
 Kernel 6
 
-[https://lh6.googleusercontent.com/KUkN_i38PUrBKbkm0HDZD6q6J9XqOllh7Hfv7P-bUrJam-2dfqXdnxBaheF-U2JPEFC4SSz-yLnuWu0fdOjaFiL5CcAlYAOkelZDRjUVZa4ylqOyHl5bM38rqHzcVBjSePd-3RQL](https://lh6.googleusercontent.com/KUkN_i38PUrBKbkm0HDZD6q6J9XqOllh7Hfv7P-bUrJam-2dfqXdnxBaheF-U2JPEFC4SSz-yLnuWu0fdOjaFiL5CcAlYAOkelZDRjUVZa4ylqOyHl5bM38rqHzcVBjSePd-3RQL)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture4.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture4.png)
 
 Kernel 7
 
 The feature maps of the **second convolution layer**, where we have 16 kernels, are shown below. The layer seems to detect more abstractive features. For example, feature map 2 was detecting some sort of features of features in the image.
 
-[https://lh4.googleusercontent.com/ovrdGyf_MppaCcMpFFU7O0adGhrEVI8Uws9ws3c6i08RHqlPVh6EyFYHbdcNAL8-uNqTzTJ3rSyUvS8ICDvBk5AzT5uT-rrdCpNyhTqZesiTER8hHcv7LiApMGHz1Xx5vG5HytNb](https://lh4.googleusercontent.com/ovrdGyf_MppaCcMpFFU7O0adGhrEVI8Uws9ws3c6i08RHqlPVh6EyFYHbdcNAL8-uNqTzTJ3rSyUvS8ICDvBk5AzT5uT-rrdCpNyhTqZesiTER8hHcv7LiApMGHz1Xx5vG5HytNb)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture5.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Picture5.png)
 
 ---
 
@@ -188,26 +186,26 @@ dnn.add_FC_layer(n_hidden=10, activation=False)
 dnn.add_stable_softmax_cross_entropy_layer()
 ```
 
-[https://lh3.googleusercontent.com/UNOBuMtF-Ap0twqJNyqR7SotyUHia0pT8p0rGqs3Po7J2RakRKzmB0id26thTbme6zbpEqMhUAUBrTjRrAYsczp6RRGJJ7LUoGHjp8mlxU1ONOu9vTcMu8BQdFlxYgcE8utvhT3H](https://lh3.googleusercontent.com/UNOBuMtF-Ap0twqJNyqR7SotyUHia0pT8p0rGqs3Po7J2RakRKzmB0id26thTbme6zbpEqMhUAUBrTjRrAYsczp6RRGJJ7LUoGHjp8mlxU1ONOu9vTcMu8BQdFlxYgcE8utvhT3H)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%203.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%203.png)
 
-[https://lh3.googleusercontent.com/6hPUFOSpKeHMF_I5FFN7NWoUAHyKkcCuKJW2SxjBnF6kR8NA89NmOPMmZaD8blyHQZYrltsiiCnYpMRdoMkFzdQun_4Kpv1AQAt5xxNjQTa3fbL533fygjRe5XnyWokbKHf3p1UI](https://lh3.googleusercontent.com/6hPUFOSpKeHMF_I5FFN7NWoUAHyKkcCuKJW2SxjBnF6kR8NA89NmOPMmZaD8blyHQZYrltsiiCnYpMRdoMkFzdQun_4Kpv1AQAt5xxNjQTa3fbL533fygjRe5XnyWokbKHf3p1UI)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%204.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%204.png)
 
 ### Prediction results
 
 On the left-hand side, a cat was correctly predicted as a cat. However, on the right-hand side, a dog was wrongly predicted as a cat. The reason might be that the dog has brown ears, which is similar to the patterns on the cat. Since we have used zero-center to normalize the data, we added the offset of 0.47 (the average value of training data) back to the image to obtain the original image.
 
-[https://lh3.googleusercontent.com/kO3eM16TAsA0JmWOU3R6OtjDZ7_ixncTqYMf3UqJYPE5ZG_-3yg76d3rW6sP3h45Yh1I1nlzOTHx9QEk30niv5vRnAUJTcoAlGxpDnCpSKsQShKFCgwHyNxduZvwM8EEIh-Oaqra](https://lh3.googleusercontent.com/kO3eM16TAsA0JmWOU3R6OtjDZ7_ixncTqYMf3UqJYPE5ZG_-3yg76d3rW6sP3h45Yh1I1nlzOTHx9QEk30niv5vRnAUJTcoAlGxpDnCpSKsQShKFCgwHyNxduZvwM8EEIh-Oaqra)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%205.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%205.png)
 
 ### Feature map visualization
 
 We set the input as an image of a dog. The dog has two colors (brown and white) and the background is dark green.
 
-[https://lh3.googleusercontent.com/XxzDJVlNuZNG_iW1dgaJtx5eiAB4mKakL6ga6N1JT77z--fPTAhoMVdi1S9XNAMag905z_iGWOiIQ8uO6u8AsPSV_q-jkxTiiuqyjMSOAMMPrXcmU4cHj0lkpKTVm17V0GNDbTO5](https://lh3.googleusercontent.com/XxzDJVlNuZNG_iW1dgaJtx5eiAB4mKakL6ga6N1JT77z--fPTAhoMVdi1S9XNAMag905z_iGWOiIQ8uO6u8AsPSV_q-jkxTiiuqyjMSOAMMPrXcmU4cHj0lkpKTVm17V0GNDbTO5)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%206.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%206.png)
 
 The figure below shows the feature maps of the first convolutional layer. We can observe that some feature maps are detecting color patches. For example, kernel 0 was detecting brown patches and kernels 5 and 11 were detecting white patches.
 
-[https://lh6.googleusercontent.com/4dUa-WhNMA71PZlBZbrdvY_FXm5929NVI0EhcBKqB0arIb_jlWJJ5x_UE918A9ZvQtYrkyKyCRug2O-ygRx3wtAAYz-yCaCMQc-6Kq2ADvwVO-4SkIYrWmd9SpUzGtTHP8iUgsxI](https://lh6.googleusercontent.com/4dUa-WhNMA71PZlBZbrdvY_FXm5929NVI0EhcBKqB0arIb_jlWJJ5x_UE918A9ZvQtYrkyKyCRug2O-ygRx3wtAAYz-yCaCMQc-6Kq2ADvwVO-4SkIYrWmd9SpUzGtTHP8iUgsxI)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%207.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%207.png)
 
 The figure below shows the feature maps in the second layer. The feature maps seem to be more abstract than the first layer.
 
-[https://lh5.googleusercontent.com/o-0D1oxhJm2Xio2EjwWWNQgShtAqh-0h5FQpOltERkOzqXneUpgXuRg2L1dclj3GxakvK6fy1iXw4H6HOk2M1xBqqSL6xLRq5nM8kcgkycFAXwM8ngCXHgU1wyVslcwVxUvSWGek](https://lh5.googleusercontent.com/o-0D1oxhJm2Xio2EjwWWNQgShtAqh-0h5FQpOltERkOzqXneUpgXuRg2L1dclj3GxakvK6fy1iXw4H6HOk2M1xBqqSL6xLRq5nM8kcgkycFAXwM8ngCXHgU1wyVslcwVxUvSWGek)
+![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%208.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/Untitled%208.png)
