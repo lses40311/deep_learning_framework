@@ -33,11 +33,11 @@ In the following, we will demonstrate the usage of this deep learning framework 
 
 ### Minimizing the sum-of-squares error
 
-The goal of this part is to perform a regression task for predicting the energy consumption based on the characteristics of the house. The project includes a jupyter notebook which demonstrates the building and training of the neural network. Simply call the `set_input()` function to add an input layer to the network and add fully-connected layers with specified number of hidden nodes by calling `add_FC_layer()`, which adds a layer for processing the data with equation <img src="https://render.githubusercontent.com/render/math?math=\textbf{A}_i = \sigma(\textbf{A}_{i-1}\textbf{W}_i + \textbf{b}_i)">, where <img src="https://render.githubusercontent.com/render/math?math=\textbf{A}_i"> is the output of layer <img src="https://render.githubusercontent.com/render/math?math=i">, <img src="https://render.githubusercontent.com/render/math?math=\textbf{W}_i"> is the weights of layer <img src="https://render.githubusercontent.com/render/math?math=i">, and <img src="https://render.githubusercontent.com/render/math?math=\textbf{b}_i"> is the bias of layer <img src="https://render.githubusercontent.com/render/math?math=i">. The last fully-connected layer has only one node to perform regression without an activation function. And finally add a `MSE layer` for calculating the cost. The code for building the network is shown below:
+The goal of this part is to perform a regression task for predicting the energy consumption based on the characteristics of the house. The project includes a jupyter notebook which demonstrates the building and training of the neural network. Simply call the `set_input()` function to add an input layer to the network and add fully-connected layers with specified number of hidden nodes by calling `add_FC_layer()`, which adds a layer for processing the data with equation <img src="https://render.githubusercontent.com/render/math?math=\textbf{A}_i = \sigma(\textbf{A}_{i-1}\textbf{W}_i %2B \textbf{b}_i)">, where <img src="https://render.githubusercontent.com/render/math?math=\textbf{A}_i"> is the output of layer <img src="https://render.githubusercontent.com/render/math?math=i">, <img src="https://render.githubusercontent.com/render/math?math=\textbf{W}_i"> is the weights of layer <img src="https://render.githubusercontent.com/render/math?math=i">, and <img src="https://render.githubusercontent.com/render/math?math=\textbf{b}_i"> is the bias of layer <img src="https://render.githubusercontent.com/render/math?math=i">. The last fully-connected layer has only one node to perform regression without an activation function. And finally add a `MSE layer` for calculating the cost. The code for building the network is shown below:
 
 ```python
 from dl_cnn import ComputationalGraph, Variable, NN
-dnn = NN(lr=0.000001
+dnn = NN(lr=0.000001)
 
 ## building the neural network
 dnn.set_input_data(X_train)
@@ -53,7 +53,7 @@ dnn.add_FC_layer(n_hidden=1, activation=False)
 dnn.add_mse_layer()
 ```
 
-The function `data_loader_regression()` was implemented for preprocessing (one-hot encoding) and normalizing ($x' = \frac{x - \mu}{max(x) - min(x)}$) the features. 
+The function `data_loader_regression()` was implemented for preprocessing (one-hot encoding) and normalizing (<img src="https://render.githubusercontent.com/render/math?math=x' = \frac{x - \mu}{max(x) - min(x)}">) the features. 
 
 ### Prediction results
 
@@ -94,7 +94,7 @@ errs = dnn.train(n_epoch=5000, mini_batch_size=64)
 
 [Hyper-parameters and results](https://www.notion.so/ed9c5b3b7c5d4cf1a31c87bc5b205fa3)
 
-The loss function (cross-entropy) is more or less correlated to the number of input data points, and the size of mini-batch might vary, so I got a fluctuating learning curve. To present the results clearly, I added the accuracies ($acc = \frac{correctly~ classified~ points}{total~ data~ points}$). The results showed that the training error is lower than the testing error. 
+The loss function (cross-entropy) is more or less correlated to the number of input data points, and the size of mini-batch might vary, so I got a fluctuating learning curve. To present the results clearly, I added the accuracies (<img src="https://render.githubusercontent.com/render/math?math=acc = \frac{correctly~ classified~ points}{total~ data~ points}">). The results showed that the training error is lower than the testing error. 
 
 ![Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/learning_curve_classification.png](Deep%20Learning%20Framework%200c344b6483bb4861b14159c99e7cc8d5/learning_curve_classification.png)
 
@@ -156,7 +156,7 @@ The feature maps of the **second convolution layer**, where we have 16 kernels, 
 
 ## Task 4: CIFAR-10 Classification
 
-We preprocessed the dataset with zero-center normalization  ($x' = \frac{x-\mu}{255.0}$) while loading the dataset with the function data_loader_cifar(). The mean is calculated based on the training data solely and then applied to the testing data. We store the mean of the training dataset for the visualization of the images.
+We preprocessed the dataset with zero-center normalization  (<img src="https://render.githubusercontent.com/render/math?math=x' = \frac{x-\mu}{255.0}">) while loading the dataset with the function data_loader_cifar(). The mean is calculated based on the training data solely and then applied to the testing data. We store the mean of the training dataset for the visualization of the images.
 
 The CIFAR-10 dataset contains relatively sophisticated images compared to the MNIST dataset. Hence, a deeper network with a larger capacity is needed. Also, we found that larger kernel/filter sizes perform better in this dataset since using smaller ones took a long time to converge. Max-pooling was used in this network for reducing the number of parameters and speeding up the training.
 
